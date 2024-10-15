@@ -92,6 +92,9 @@ pub use qpointf::QPointF;
 mod qurl;
 pub use qurl::QUrl;
 
+mod quuid;
+pub use quuid::{QUuid, QUuidVariant, QUuidVersion};
+
 mod qvariant;
 pub use qvariant::{QVariant, QVariantValue};
 
