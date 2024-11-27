@@ -675,6 +675,7 @@ impl CxxQtBuilder {
             #[cfg(not(unix))]
             if let Some(path) = include_path.as_ref().to_str() {
                 builder.include(path.replace(std::path::MAIN_SEPARATOR, "/"));
+                println!("cargo:warning={path}");
                 continue;
             }
             builder.include(include_path);
