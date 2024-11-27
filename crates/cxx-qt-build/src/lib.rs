@@ -672,6 +672,11 @@ impl CxxQtBuilder {
         }
 
         for include_path in include_paths {
+            #[cfg(not(unix))]
+            if let Some(path) = include_path.as_ref().to_str() {
+                builder.include(path.replace(std::path::MAIN_SEPARATOR, "/"));
+                continue;
+            }
             builder.include(include_path);
         }
     }
