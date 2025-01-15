@@ -11,7 +11,7 @@ pub mod qobject {
     unsafe extern "C++" {
         include!("cxx-qt-lib/qhash.h");
         /// QHash<QString, QVariant> from cxx_qt_lib
-        type QHash_QString_QVariant = cxx_qt_lib::QHash<cxx_qt_lib::QHashPair_QString_QVariant>;
+        type QHash_QString_QVariant = cxx_qt_lib::QHash<cxx_qt_lib::QString, cxx_qt_lib::QVariant>;
         include!("cxx-qt-lib/qlist.h");
         /// QList<i32> from cxx_qt_lib
         type QList_i32 = cxx_qt_lib::QList<i32>;
@@ -77,10 +77,7 @@ pub mod qobject {
 
 use core::pin::Pin;
 use cxx_qt::CxxQtType;
-use cxx_qt_lib::{
-    QHash, QHashPair_QString_QVariant, QList, QMap, QMapPair_QString_QVariant, QSet, QString,
-    QVariant, QVector,
-};
+use cxx_qt_lib::{QHash, QList, QMap, QMapPair_QString_QVariant, QSet, QString, QVariant, QVector};
 
 /// A QObject which stores container types internally
 ///
@@ -93,7 +90,7 @@ pub struct RustContainersRust {
     string_set: QString,
     string_vector: QString,
 
-    pub(crate) hash: QHash<QHashPair_QString_QVariant>,
+    pub(crate) hash: QHash<QString, QVariant>,
     pub(crate) list: QList<i32>,
     pub(crate) map: QMap<QMapPair_QString_QVariant>,
     pub(crate) set: QSet<i32>,
@@ -106,7 +103,7 @@ impl qobject::RustContainers {
         // Update the private rust fields via the rust_mut
         {
             let mut rust_mut = self.as_mut().rust_mut();
-            rust_mut.hash = QHash::<QHashPair_QString_QVariant>::default();
+            rust_mut.hash = QHash::<QString, QVariant>::default();
             rust_mut.list = QList::<i32>::default();
             rust_mut.set = QSet::<i32>::default();
             rust_mut.vector = QVector::<i32>::default();

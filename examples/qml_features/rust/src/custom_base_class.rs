@@ -20,7 +20,7 @@ pub mod qobject {
     unsafe extern "C++" {
         include!("cxx-qt-lib/qhash.h");
         /// QHash<i32, QByteArray> from cxx_qt_lib
-        type QHash_i32_QByteArray = cxx_qt_lib::QHash<cxx_qt_lib::QHashPair_i32_QByteArray>;
+        type QHash_i32_QByteArray = cxx_qt_lib::QHash<i32, cxx_qt_lib::QByteArray>;
 
         include!("cxx-qt-lib/qvariant.h");
         /// QVariant from cxx_qt_lib
@@ -241,7 +241,7 @@ pub mod qobject {
 
 use core::pin::Pin;
 use cxx_qt::{CxxQtType, Threading};
-use cxx_qt_lib::{QByteArray, QHash, QHashPair_i32_QByteArray, QModelIndex, QVariant, QVector};
+use cxx_qt_lib::{QByteArray, QHash, QModelIndex, QVariant, QVector};
 
 impl Default for qobject::State {
     fn default() -> Self {
@@ -393,8 +393,8 @@ impl qobject::CustomBaseClass {
 
 impl qobject::CustomBaseClass {
     /// Return the role names for the QAbstractListModel
-    pub fn role_names(&self) -> QHash<QHashPair_i32_QByteArray> {
-        let mut roles = QHash::<QHashPair_i32_QByteArray>::default();
+    pub fn role_names(&self) -> QHash<i32, QByteArray> {
+        let mut roles = QHash::<i32, QByteArray>::default();
         roles.insert(qobject::Roles::Id.repr, QByteArray::from("id"));
         roles.insert(qobject::Roles::Value.repr, QByteArray::from("value"));
         roles

@@ -3,14 +3,14 @@
 //
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-use cxx_qt_lib::{QHash, QHashPair_QString_QVariant, QString, QVariant};
+use cxx_qt_lib::{QHash, QString, QVariant};
 
 #[cxx::bridge]
 mod qhash_cxx {
     // ANCHOR: book_qhash
     unsafe extern "C++" {
         include!("cxx-qt-lib/qhash.h");
-        type QHash_QString_QVariant = cxx_qt_lib::QHash<cxx_qt_lib::QHashPair_QString_QVariant>;
+        type QHash_QString_QVariant = cxx_qt_lib::QHash<cxx_qt_lib::QString, cxx_qt_lib::QVariant>;
     }
     // ANCHOR_END: book_qhash
 
@@ -21,14 +21,14 @@ mod qhash_cxx {
     }
 }
 
-fn construct_qhash_qstring_qvariant() -> QHash<QHashPair_QString_QVariant> {
-    let mut h = QHash::<QHashPair_QString_QVariant>::default();
+fn construct_qhash_qstring_qvariant() -> QHash<cxx_qt_lib::QString, cxx_qt_lib::QVariant> {
+    let mut h = QHash::<QString, QVariant>::default();
     h.insert(QString::from("kdab"), QVariant::from(&10));
     h.insert(QString::from("Qt"), QVariant::from(&QString::from("Rust")));
     h
 }
 
-fn read_qhash_qstring_qvariant(h: &QHash<QHashPair_QString_QVariant>) -> bool {
+fn read_qhash_qstring_qvariant(h: &QHash<QString, QVariant>) -> bool {
     // Check that the iterator works
     if h.iter().count() != 2 || h.iter().count() != 2 {
         return false;
@@ -53,8 +53,6 @@ fn read_qhash_qstring_qvariant(h: &QHash<QHashPair_QString_QVariant>) -> bool {
         && h.len() == 2
 }
 
-fn clone_qhash_qstring_qvariant(
-    h: &QHash<QHashPair_QString_QVariant>,
-) -> QHash<QHashPair_QString_QVariant> {
+fn clone_qhash_qstring_qvariant(h: &QHash<QString, QVariant>) -> QHash<QString, QVariant> {
     h.clone()
 }
