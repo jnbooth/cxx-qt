@@ -3,8 +3,6 @@
 //
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-use cxx::{type_id, ExternType};
-
 #[cxx::bridge]
 pub mod ffi {
     unsafe extern "C++" {
@@ -14,7 +12,7 @@ pub mod ffi {
         type QVariant = crate::QVariant;
 
         include!("cxx-qt-lib/qhash.h");
-        type QHash_QString_QVariant = crate::QHash<super::QHashPair_QString_QVariant>;
+        type QHash_QString_QVariant = crate::QHash<QString, QVariant>;
     }
 
     unsafe extern "C++" {
@@ -100,12 +98,4 @@ pub(crate) fn len(hash: &ffi::QHash_QString_QVariant) -> isize {
 
 pub(crate) fn remove(hash: &mut ffi::QHash_QString_QVariant, key: &ffi::QString) -> bool {
     ffi::remove_QString_QVariant(hash, key)
-}
-
-#[allow(non_camel_case_types)]
-pub struct QHashPair_QString_QVariant;
-
-unsafe impl ExternType for QHashPair_QString_QVariant {
-    type Id = type_id!("QHashPair_QString_QVariant");
-    type Kind = cxx::kind::Trivial;
 }
