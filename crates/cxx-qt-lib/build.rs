@@ -83,6 +83,7 @@ fn main() {
         "core/qbytearray",
         "core/qcoreapplication",
         "core/qdate",
+        "core/qflags/global",
         "core/qhash/qhash_i32_qbytearray",
         "core/qhash/qhash_qstring_qvariant",
         "core/qline",
