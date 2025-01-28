@@ -65,8 +65,8 @@ impl<T: QFlag> QFlags<T> {
         self.repr
     }
 
-    /// Returns `false` if no flag is set (i.e., if the value stored by the QFlags object is 0);
-    /// otherwise returns `true`.
+    /// Returns `true` if no flag is set (i.e., if the value stored by the QFlags object is 0);
+    /// otherwise returns `false`.
     pub fn is_empty(self) -> bool {
         self.repr == T::Repr::ZERO
     }
