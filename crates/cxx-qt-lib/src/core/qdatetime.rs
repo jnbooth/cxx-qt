@@ -89,6 +89,10 @@ mod ffi {
         #[rust_name = "to_offset_from_utc"]
         fn toOffsetFromUtc(self: &QDateTime, offset_seconds: i32) -> QDateTime;
 
+        /// Returns the time as a string. The format parameter determines the format of the string.
+        #[rust_name = "format_enum"]
+        fn toString(self: &QDateTime, format: DateFormat) -> QString;
+
         /// Returns a copy of this datetime converted to the given time spec.
         ///
         /// Note this method is only available with Qt < 6.8
@@ -209,9 +213,6 @@ mod ffi {
         #[doc(hidden)]
         #[rust_name = "qdatetime_to_debug_qstring"]
         fn toDebugQString(value: &QDateTime) -> QString;
-        #[doc(hidden)]
-        #[rust_name = "qdatetime_to_qstring"]
-        fn toQString(value: &QDateTime) -> QString;
     }
 }
 
@@ -402,7 +403,7 @@ impl Ord for QDateTime {
 
 impl fmt::Display for QDateTime {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", ffi::qdatetime_to_qstring(self))
+        write!(f, "{}", self.format_enum(ffi::DateFormat::TextDate))
     }
 }
 
