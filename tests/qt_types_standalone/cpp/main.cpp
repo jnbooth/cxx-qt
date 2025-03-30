@@ -9,6 +9,7 @@
 
 #if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
 #include "qanystringview.h"
+#include "qbytearrayview.h"
 #endif
 
 #include "qbytearray.h"
@@ -66,6 +67,7 @@ main(int argc, char* argv[])
 
 #if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
   runTest(QScopedPointer<QObject>(new QAnyStringViewTest));
+  runTest(QScopedPointer<QObject>(new QByteArrayViewTest));
 #endif
   runTest(QScopedPointer<QObject>(new QByteArrayTest));
   runTest(QScopedPointer<QObject>(new QColorTest));

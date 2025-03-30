@@ -242,7 +242,7 @@ fn main() {
     ];
 
     if qtbuild.version().major > 5 {
-        rust_bridges.extend(["core/qanystringview"]);
+        rust_bridges.extend(["core/qanystringview", "core/qbytearrayview"]);
     }
 
     if qt_gui_enabled() {
@@ -317,7 +317,7 @@ fn main() {
     ];
 
     if qtbuild.version().major > 5 {
-        cpp_files.extend(["core/qanystringview"]);
+        cpp_files.extend(["core/qbytearrayview", "core/qanystringview"]);
     }
 
     if qt_gui_enabled() {

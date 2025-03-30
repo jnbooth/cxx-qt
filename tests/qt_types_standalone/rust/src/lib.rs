@@ -6,6 +6,8 @@
 
 #[cfg(cxxqt_qt_version_major = "6")]
 mod qanystringview;
+#[cfg(cxxqt_qt_version_major = "6")]
+mod qbytearrayview;
 
 mod qbytearray;
 mod qcolor;

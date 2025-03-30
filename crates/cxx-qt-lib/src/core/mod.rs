@@ -9,6 +9,11 @@ pub use qbytearray::QByteArray;
 mod qcoreapplication;
 pub use qcoreapplication::QCoreApplication;
 
+#[cfg(cxxqt_qt_version_major = "6")]
+mod qbytearrayview;
+#[cfg(cxxqt_qt_version_major = "6")]
+pub use qbytearrayview::QByteArrayView;
+
 mod qdate;
 pub use qdate::QDate;
 
