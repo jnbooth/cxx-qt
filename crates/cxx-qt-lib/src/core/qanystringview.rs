@@ -6,6 +6,7 @@ use crate::{QByteArray, QString};
 use core::ffi::c_void;
 use core::marker::PhantomData;
 use core::mem::MaybeUninit;
+use std::cmp::Ordering;
 use cxx::{type_id, ExternType};
 use std::fmt;
 
@@ -55,6 +56,10 @@ mod ffi {
         fn construct<'a>(string: &QAnyStringView<'a>) -> QAnyStringView<'a>;
 
         #[doc(hidden)]
+        #[rust_name = "QAnyStringView_cmp"]
+        fn operatorCmp(a: &QAnyStringView, b: &QAnyStringView) -> i8;
+
+        #[doc(hidden)]
         #[rust_name = "QAnyStringView_eq"]
         fn operatorEq(a: &QAnyStringView, b: &QAnyStringView) -> bool;
 
@@ -98,6 +103,18 @@ impl PartialEq for QAnyStringView<'_> {
 }
 
 impl Eq for QAnyStringView<'_> {}
+
+impl PartialOrd for QAnyStringView<'_> {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for QAnyStringView<'_> {
+    fn cmp(&self, other: &Self) -> Ordering {
+        ffi::QAnyStringView_cmp(self, other).cmp(&0)
+    }
+}
 
 impl<'a> From<&'a str> for QAnyStringView<'a> {
     /// Constructs a QAnyStringView from a Rust string

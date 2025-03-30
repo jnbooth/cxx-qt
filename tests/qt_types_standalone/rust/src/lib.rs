@@ -8,6 +8,8 @@
 mod qanystringview;
 #[cfg(cxxqt_qt_version_major = "6")]
 mod qbytearrayview;
+#[cfg(cxxqt_qt_version_major = "6")]
+mod qlatin1stringview;
 
 mod qbytearray;
 mod qcolor;

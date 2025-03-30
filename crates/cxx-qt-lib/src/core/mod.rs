@@ -28,6 +28,11 @@ pub use qflags::{QFlag, QFlagRepr, QFlags};
 mod qhash;
 pub use qhash::{QHash, QHashPair, QHashPair_QString_QVariant, QHashPair_i32_QByteArray};
 
+#[cfg(cxxqt_qt_version_major = "6")]
+mod qlatin1stringview;
+#[cfg(cxxqt_qt_version_major = "6")]
+pub use qlatin1stringview::QLatin1StringView;
+
 mod qline;
 pub use qline::QLine;
 
